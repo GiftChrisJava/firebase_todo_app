@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:socialminiapp/dark_mode.dart';
-import 'package:socialminiapp/light_mode.dart';
+import 'package:socialminiapp/theme/dark_mode.dart';
+import 'package:socialminiapp/theme/light_mode.dart';
 import '/pages/login_page.dart';
 
 void main() {
