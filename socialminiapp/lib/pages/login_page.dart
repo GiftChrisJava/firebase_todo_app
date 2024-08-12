@@ -1,20 +1,51 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:socialminiapp/components/button.dart';
 import 'package:socialminiapp/components/textfield.dart';
+import 'package:socialminiapp/helper/helper_functions.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   final void Function()? onTap;
 
-  LoginPage({super.key, this.onTap});
+  const LoginPage({super.key, this.onTap});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   // text controllers
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
 
   // login
-  void login() {}
+  // register
+  void login() async {
+    // show loading circle
+    showDialog(
+        context: context,
+        builder: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ));
+
+    // try to sign in
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text);
+
+      // pop the loading circle
+      if (context.mounted) Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      // pop loading circle
+      Navigator.pop(context);
+
+      // display error message
+      displayMessageToUser(e.code, context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +105,7 @@ class LoginPage extends StatelessWidget {
                   children: [
                     Text("Don't have an account?"),
                     GestureDetector(
-                      onTap: onTap,
+                      onTap: widget.onTap,
                       child: Text(
                         " Register Here",
                         style: TextStyle(fontWeight: FontWeight.bold),

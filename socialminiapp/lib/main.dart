@@ -2,6 +2,7 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:socialminiapp/auth/auth.dart';
 import 'package:socialminiapp/auth/login_or_register.dart';
 import 'package:socialminiapp/firebase_options.dart';
 import 'package:socialminiapp/theme/dark_mode.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // home: RegisterPage(),
-      home: LoginOrRegister(),
+      home: AuthPage(),
       theme: lightMode,
       darkTheme: darkMode,
     );
