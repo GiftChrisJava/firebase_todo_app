@@ -1,62 +1,56 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:socialminiapp/components/button.dart';
 import 'package:socialminiapp/components/textfield.dart';
 
 class LoginPage extends StatelessWidget {
+  final void Function()? onTap;
+
+  LoginPage({super.key, this.onTap});
+
   // text controllers
   final TextEditingController emailController = TextEditingController();
-
   final TextEditingController passwordController = TextEditingController();
-
-  LoginPage({super.key});
 
   // login
   void login() {}
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(25),
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      backgroundColor: Theme.of(context).colorScheme.background,
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(25),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
               // logo
               Icon(
                 Icons.person,
                 size: 80,
                 color: Theme.of(context).colorScheme.inversePrimary,
               ),
-
               const SizedBox(height: 25),
-
               // app name
               Text(
                 'M  I N I M A L',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-
               const SizedBox(height: 55),
-
               // txt field
               MyTextField(
                   hintText: "Email",
                   obscureText: false,
                   controller: emailController),
-
               const SizedBox(height: 18),
-
-              // txt field
+              // password field
               MyTextField(
                   hintText: "Password",
                   obscureText: true,
                   controller: passwordController),
-
               const SizedBox(height: 18),
-
               // forgot password
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -67,29 +61,30 @@ class LoginPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 25),
-
               // login button
               MyButton(
                 text: "Login",
                 onTap: login,
               ),
               const SizedBox(height: 25),
-
               // do not have an account ?
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text("Don't have an account?"),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: onTap,
                     child: Text(
-                      "Register Here",
+                      " Register Here",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
-              )
-            ]),
+              ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
