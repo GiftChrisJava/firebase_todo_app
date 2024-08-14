@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:socialminiapp/auth/auth.dart';
 import 'package:socialminiapp/auth/login_or_register.dart';
 import 'package:socialminiapp/firebase_options.dart';
+import 'package:socialminiapp/pages/home_page.dart';
+import 'package:socialminiapp/pages/profile_page.dart';
+import 'package:socialminiapp/pages/users.dart';
 import 'package:socialminiapp/theme/dark_mode.dart';
 import 'package:socialminiapp/theme/light_mode.dart';
 
@@ -25,7 +28,15 @@ class MyApp extends StatelessWidget {
       // home: RegisterPage(),
       home: AuthPage(),
       theme: lightMode,
-      darkTheme: darkMode,
+      darkTheme: lightMode,
+
+      // create some routes
+      routes: {
+        "/login_or_register": (context) => const LoginOrRegister(),
+        "/home_page": (context) => const HomePage(),
+        "/profile_page": (context) => const ProfilePage(),
+        "/users": (context) => const MyUsers(),
+      },
     );
   }
 }
